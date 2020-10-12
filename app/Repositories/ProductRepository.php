@@ -10,8 +10,7 @@ class ProductRepository
 
     public function getProduct()
     {
-        //$product = DB::table('products')->get();
-        $product = Product::where('id', 1)->get(); //TODO: изменить запрос к базе
+        $product = DB::table('products')->get();
 
         return $product;
     }

@@ -23,4 +23,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::get('/buy', 'PageController@buy')->name('buy');
+Route::get('/buy', 'PageController@buyPage')->name('buy');
+Route::post('/save', 'OrderController@saveOrder')->name('saveOrder');
+
+Route::get('/buy_cashback', 'PageController@buyWithCashback')->name('buy_cashback');

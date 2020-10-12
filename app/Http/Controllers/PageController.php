@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\ProductService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -98,7 +99,7 @@ class PageController extends Controller
         //
     }
 
-    public function buy()
+    public function buyPage()
     {
         $product = $this->product_service->getProduct();
 
@@ -106,7 +107,14 @@ class PageController extends Controller
             return view ('buy', compact('product'));
         }
         else return redirect('/'); //TODO: изменть на 404 или ошибку подключения
-       
+    }
 
+    public function buyWithCashback()
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            return view('buy_with_cashback', compact('user'));
+        }
+        return redirect('/register'); //TODO: добавить сообщение "Сначала зарегаться"
     }
 }

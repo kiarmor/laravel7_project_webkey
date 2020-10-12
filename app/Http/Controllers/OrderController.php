@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveOrderRequest;
-use OrderService;
 
 class OrderController extends Controller
 {
@@ -12,16 +12,15 @@ class OrderController extends Controller
 
     public function __construct(OrderService $order_service)
     {
-        $this->service = $order_service;
+        $this->order_service = $order_service;
     }
 
     public function saveOrder(SaveOrderRequest $request)
     {
-       $save_to_db = $this->service->saveOrder($request);
+       $save_to_db = $this->order_service->saveOrder($request);
 
         if ($save_to_db){
-            return redirect()
-                ->back()
+            return redirect('/')
                 ->with(['success' => 'Successfully saved']);
         }
         else {
@@ -30,6 +29,11 @@ class OrderController extends Controller
                 ->withErrors(['msg' => 'Error'])
                 ->withInput();
         }
+    }
+
+    public function saveWithCashbackOrder()
+    {
+
     }
 
 }

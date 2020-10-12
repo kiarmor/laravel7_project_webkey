@@ -14,9 +14,7 @@ class OrderService
 
     public function saveOrder($request)
     {
-        $save = $this->repository->saveOrder($request);
-
-        return $save;
+        return $this->repository->saveOrder($request);
     }
 
 }

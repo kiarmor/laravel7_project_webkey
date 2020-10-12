@@ -25,9 +25,8 @@ class SaveOrderRequest extends FormRequest
     {
         return [
             'user_name' => 'required|min:3|max:100|string',
-            'phone' => 'required|min:3|max:15',
+            'phone_number' => 'min:3|max:15',
             'email' => [
-                'string',
                 'email',
                 'max:100',
             ],

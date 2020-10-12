@@ -1,12 +1,12 @@
 @extends('layouts.layout')
 
 
-@section('title', 'Buy form')
+@section('title', 'Buy with cashback')
 
 
 @section('content')
 
-    @foreach ($product as $item)
+    {{--@foreach ($product as $item)
 
         <a href="/buy_cashback"><p>{{$item->description}}</p></a><br>
         <p>Цена {{$item->price}}</p> <br>
@@ -14,15 +14,18 @@
 
     @if($errors->any())
 
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-    @endif
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
+    @endif--}}
+
+    Welcome {{$user->name}}
+
     <form method="post" action="{{route('saveOrder')}}">
         @csrf
         <div class="col">
             <label for="name">Имя</label>
-            <input name="user_name" type="text" class="form-control" placeholder="Enter your name" required>
+            <input name="user_name" type="text" class="form-control" placeholder="Enter your name" required value="{{$user->name}}">
         </div>
 
         <div class="col">
@@ -32,7 +35,7 @@
 
         <div class="col">
             <label for="name">Email</label>
-            <input name="email" type="email" class="form-control" placeholder="Enter your email">
+            <input name="email" type="email" class="form-control" value="{{$user->email}}" disabled>
         </div>
 
         <div class="col">
