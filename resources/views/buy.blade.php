@@ -8,7 +8,7 @@
 
     @foreach ($product as $item)
 
-        <a href="/buy_cashback"><p>{{$item->description}}</p></a><br>
+        <a href="/buy_cashback"><p>У Вас все еще есть возможность приобрести {{$item->price}} с кешбэком в 100%!! Не упусти свой шанс!</p></a><br>
         <p>Цена {{$item->price}}</p> <br>
     @endforeach
 

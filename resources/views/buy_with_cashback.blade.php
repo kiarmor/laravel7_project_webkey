@@ -19,9 +19,9 @@
         @endforeach
     @endif--}}
 
-    Welcome {{$user->name}}
+    <h1>Welcome {{$user->name}}</h1>
 
-    <form method="post" action="{{route('saveOrder')}}">
+    <form method="post" action="{{route('buyWithCashback')}}">
         @csrf
         <div class="col">
             <label for="name">Имя</label>

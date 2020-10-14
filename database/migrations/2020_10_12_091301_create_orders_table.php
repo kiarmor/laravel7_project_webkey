@@ -16,10 +16,13 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->text('user_name');
             $table->string('phone_number');
             $table->text('email')->nullable();
             $table->text('address');
+            $table->enum('paid', ['yes', 'no'],)->default('no');
         });
     }
 
