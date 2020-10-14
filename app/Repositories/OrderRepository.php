@@ -51,4 +51,10 @@ class OrderRepository
 
         return $user_orders;
     }
+
+    public function cashbackUpdate($cashback_orders)
+    {
+        return true;
+
+    }
 }

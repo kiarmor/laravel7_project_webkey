@@ -57,6 +57,7 @@ class PageController extends Controller
     {
         $user = Auth::user();
         $user_orders = $this->order_service->getOrders($user->id);
+        dd($user_orders);
 
         return view('dashboard', compact('user', 'user_orders'));
     }
