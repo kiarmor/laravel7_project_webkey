@@ -13,10 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Route::get('/', function () {
+    return view('my_welcome');
+});*/
+Route::get('/', 'PageController@index');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+/*Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard');*/
+
+
+Route::get('/buy', 'PageController@buyPage')->name('buy');
+Route::post('/save', 'OrderController@saveOrder')->name('saveOrder');
+
+Route::get('/buy_cashback', 'PageController@buyWithCashback')->name('buy_cashback');
+Route::post('/save_with_cashback', 'OrderController@buyWithCashback')->name('buyWithCashback');
+
+Route::get('/dashboard', 'PageController@dashboard')->middleware(['auth:sanctum', 'verified'])->name('dashboard');
