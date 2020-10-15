@@ -27,10 +27,12 @@ class PageController extends Controller
     {
         $product = $this->product_service->getProduct();
 
-        if ($product) {
-            return view('my_welcome', compact('product'));
-        }
-        else return redirect('/'); //TODO: изменть на 404 или ошибку подключения
+            if ($product) {
+                return view('my_welcome', compact('product'));
+            }
+            return view('layouts.error'); //TODO: изменть на 404 или ошибку подключения
+
+
 
     }
 
@@ -41,7 +43,7 @@ class PageController extends Controller
         if ($product) {
             return view ('buy', compact('product'));
         }
-        else return redirect('/'); //TODO: изменть на 404 или ошибку подключения
+        return view('layouts.error'); //TODO: изменть на 404 или ошибку подключения
     }
 
     public function buyWithCashback()
@@ -53,12 +55,13 @@ class PageController extends Controller
         return redirect('/register'); //TODO: добавить сообщение "Сначала зарегаться"
     }
 
-    public function dashboard()
+    public function profile()
     {
         $user = Auth::user();
         $user_orders = $this->order_service->getOrders($user->id);
-        dd($user_orders);
-
-        return view('dashboard', compact('user', 'user_orders'));
+        if ($user_orders) {
+            return view('profile', compact('user', 'user_orders'));
+        }
+        return view('layouts.error');
     }
 }

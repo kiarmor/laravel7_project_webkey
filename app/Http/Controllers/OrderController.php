@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     public function saveOrder(SaveOrderRequest $request)
     {
-       $save_to_db = $this->order_service->saveOrder($request);
+       $save_to_db = $this->order_service->saveOrder($request, $cashback = false);
 
         if ($save_to_db){
             return redirect('/')
@@ -31,9 +31,9 @@ class OrderController extends Controller
         }
     }
 
-    public function buyWithCashback(SaveOrderRequest $request)
+    public function buyWithCashback(SaveOrderRequest $request, $cashback = true)
     {
-        $save_with_cashback = $this->order_service->saveWithCashbackOrder($request);
+        $save_with_cashback = $this->order_service->saveWithCashbackOrder($request, $cashback);
         if ($save_with_cashback){
 
             return redirect('/');

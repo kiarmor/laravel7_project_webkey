@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderRepository
 {
-    public function saveOrder($request)
+    public function saveOrder($request, $cashback)
     {
         $order = new Order;
         $order->user_name = $request->user_name;
@@ -22,7 +22,7 @@ class OrderRepository
         $order->address = $request->address;
         $order->save();
 
-        if (Auth::user()){
+        if ($cashback === true){
             $this->saveWithCashbackOrder($request, $order);
         }
 
@@ -54,7 +54,13 @@ class OrderRepository
 
     public function cashbackUpdate($cashback_orders)
     {
-        return true;
+        $db = DB::table('cashback_orders')
+            ->where('order_id', $cashback_orders->order_id)
+            ->update([
+                'current_date' => $cashback_orders->current_date,
+                'current_cashback' => $cashback_orders->current_cashback,
+            ]);
 
+        return $db;
     }
 }

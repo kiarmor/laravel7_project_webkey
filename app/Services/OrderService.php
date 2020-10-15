@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use Carbon\Carbon;
+use Illuminate\Suppotr\Collection;
 
 class OrderService
 {
@@ -16,14 +17,14 @@ class OrderService
         $this->product_repository = $product_repository;
     }
 
-    public function saveOrder($request)
+    public function saveOrder($request, $cashback)
     {
-        return $this->order_repository->saveOrder($request);
+        return $this->order_repository->saveOrder($request, $cashback);
     }
 
-    public function saveWithCashbackOrder($request)
+    public function saveWithCashbackOrder($request, $cashback)
     {
-        $request['paid'] = 'no';
+        $request['paid'] = 'yes';
 
         if ($request->paid == 'yes'){
             $product = $this->product_repository->getProduct();
@@ -33,7 +34,7 @@ class OrderService
                 $request['total_paid'] = $item->price;
             }
         }
-        $save_to_db = $this->order_repository->saveOrder($request);
+        $save_to_db = $this->order_repository->saveOrder($request, $cashback);
 
         return $save_to_db;
     }
@@ -44,21 +45,20 @@ class OrderService
         $all_user_orders = $this->order_repository->getUserOrders($id);
         foreach ($all_user_orders as $user_orders){
             $curr_date = Carbon::parse($user_orders->current_date);
-            if ($curr_date->addDays(30) <= today()){
-                //dd($curr_date->format('Y m d'));
-                $user_orders->current_date = $curr_date->format('Y m d');
+            if ($curr_date->addDays($MONTH) <= today()){
+                $user_orders->current_date = $curr_date->format('Y-m-d');
                 if (!$user_orders->current_cashback >= $user_orders->total_paid){
                     $user_orders->current_cashback =+ $user_orders->cashback_per_month;
-                    if ($user_orders->current_cashback > $user_orders->total_paid){
-                        $user_orders->current_cashback = $user_orders->total_paid;
-                    }
+                }
+                else {
+                    $user_orders->current_cashback = $user_orders->total_paid;
                 }
                 $this->order_repository->cashbackUpdate($user_orders);
-                return $user_orders;
+
+                return $this->order_repository->getUserOrders($id);
             }
             else return $all_user_orders;
         }
-
     }
 
 }

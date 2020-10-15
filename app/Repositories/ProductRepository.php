@@ -10,7 +10,14 @@ class ProductRepository
 
     public function getProduct()
     {
-        $product = DB::table('products')->get();
+        try {
+            // Validate the value...
+            $product = DB::table('products')->get();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return false;
+        }
 
         return $product;
     }
