@@ -39,6 +39,6 @@ class OrderController extends Controller
             return redirect('/');
         }
 
-         return redirect()->back();
+         return back()->withErrors(['msg' => 'Cant save']);
     }
 }

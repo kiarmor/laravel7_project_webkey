@@ -63,4 +63,12 @@ class OrderRepository
 
         return $db;
     }
+
+    /*public function getUserInfo($id)
+    {
+        return DB::table('orders')
+        ->where('user_id', '=', $id)
+        ->limit(1)
+        ->get();
+    }*/
 }

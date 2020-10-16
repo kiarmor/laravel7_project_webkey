@@ -16,6 +16,7 @@
                 <th>Кешбэк в следующем месяце составит</th>
                 <th>Сумма покупки</th>
                 <th>Забрать кешбэк</th>
+                <th>Редактировать детали заказа</th>
             </tr>
             </thead>
             <tbody>
@@ -34,6 +35,11 @@
                         <td>{{$order->total_paid}}</td>
                         <td>
                             <button type="button" class="btn btn-primary">Вывести {{$order->current_cashback }} грн.</button>
+                        </td>
+                        <td>
+                            <form  id="edit" method="get" action="{{route('edit_order', $order->id)}}">
+                            <button type="button" class="btn btn-primary" id="{{$order->id}}" >Редактровать заказ</button>
+                            </form>
                         </td>
                     </tr>
 

@@ -55,13 +55,26 @@ class PageController extends Controller
         return redirect('/register'); //TODO: добавить сообщение "Сначала зарегаться"
     }
 
-    public function profile()
+    public function user_account()
     {
         $user = Auth::user();
         $user_orders = $this->order_service->getOrders($user->id);
         if ($user_orders) {
-            return view('profile', compact('user', 'user_orders'));
+            return view('user_account', compact('user', 'user_orders'));
         }
         return view('layouts.error');
+    }
+
+    public function dashboard()
+    {
+       /* $user = Auth::user();
+        $user_info = $this->order_service->getOrders($user->id);*/
+        return view('dashboard');
+
+    }
+
+    public function show($id)
+    {
+        dd('show');
     }
 }
