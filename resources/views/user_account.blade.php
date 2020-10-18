@@ -34,11 +34,13 @@
                         </td>
                         <td>{{$order->total_paid}}</td>
                         <td>
-                            <button type="button" class="btn btn-primary">Вывести {{$order->current_cashback }} грн.</button>
+                            <form  id="edit" method="get" action="">
+                            <button type="button" class="btn btn-primary">Вывести {{$order->current_cashback}} грн.</button>
+                            </form>
                         </td>
                         <td>
-                            <form  id="edit" method="get" action="{{route('edit_order', $order->id)}}">
-                            <button type="button" class="btn btn-primary" id="{{$order->id}}" >Редактровать заказ</button>
+                            <form  id="edit" method="get" action="{{route('edit_order', $order->order_id)}}">
+                            <button type="submit"  class="btn btn-primary" id="{{$order->order_id}}">Редактровать заказ</button>
                             </form>
                         </td>
                     </tr>

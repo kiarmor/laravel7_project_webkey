@@ -75,6 +75,12 @@ class PageController extends Controller
 
     public function show($id)
     {
-        dd('show');
+        $user_order = $this->order_service->getUserOrder($id);
+
+        if ($user_order){
+            return view('pages.edit_order', compact('user_order'));
+        }
+
+        return redirect()->back();
     }
 }

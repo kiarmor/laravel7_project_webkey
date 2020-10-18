@@ -31,7 +31,9 @@ Route::post('/save', 'OrderController@saveOrder')->name('saveOrder');
 //TODO: middleware group
 Route::get('/buy_cashback', 'PageController@buyWithCashback')->name('buy_cashback');
 Route::post('/save_with_cashback', 'OrderController@buyWithCashback')->name('buyWithCashback');
-Route::get('/edit_order/{$id}', 'OrderController@show')->name('edit_order');
+Route::get('/edit_order/{id}', 'PageController@show')->name('edit_order');
+//Route::post('/update_order/{id}', 'OrderController@update')->name('update_order');
+Route::resource('orders', 'OrderController')->names('orders');
 
 
 Route::get('/user/account', 'PageController@user_account')->middleware(['auth:sanctum', 'verified'])->name('user_account');

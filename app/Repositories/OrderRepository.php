@@ -71,4 +71,24 @@ class OrderRepository
         ->limit(1)
         ->get();
     }*/
+
+    public function getUserOrder($id)
+    {
+        $user_order = DB::table('orders')
+            ->where('id', '=', $id)
+            ->get();
+
+        return $user_order;
+    }
+
+    public function updateOrder($request, $id)
+    {
+        return DB::table('orders')
+            ->where('id', '=', $id)
+            ->update([
+                'user_name' => $request->user_name,
+                'phone_number' => $request->phone_number,
+                'address' => $request->address,
+            ]);
+    }
 }

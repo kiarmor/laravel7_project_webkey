@@ -36,9 +36,25 @@ class OrderController extends Controller
         $save_with_cashback = $this->order_service->saveWithCashbackOrder($request, $cashback);
         if ($save_with_cashback){
 
-            return redirect('/');
+            return redirect('/')
+                ->with(['success' => 'Successfully saved']);
         }
 
          return back()->withErrors(['msg' => 'Cant save']);
+    }
+
+    public function update(SaveOrderRequest $request, $id)
+    {
+       $edit_order = $this->order_service->updateOrder($request, $id);
+
+        if ($edit_order){
+            return redirect('/')
+                ->with(['success' => 'Successfully saved']);
+        }
+
+            return redirect()
+                ->back()
+                ->withErrors(['msg' => 'Error'])
+                ->withInput();
     }
 }

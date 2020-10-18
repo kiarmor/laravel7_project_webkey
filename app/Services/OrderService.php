@@ -66,4 +66,14 @@ class OrderService
         return $this->getUserInfo($id);
     }*/
 
+    public function getUserOrder($id)
+    {
+        return $this->order_repository->getUserOrder($id);
+    }
+
+    public function updateOrder($request, $id)
+    {
+        return $this->order_repository->updateOrder($request, $id);
+    }
+
 }
