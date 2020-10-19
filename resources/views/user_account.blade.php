@@ -1,12 +1,13 @@
 @extends('layouts.layout')
 
 @section('title', 'Profile')
-
+<div class="header"> </div>
 @section('content')
 
 
+    <h3>Welcome {{$user->name}}</h3>
     <div class="table-responsive">
-        WELCOME <h5>{{$user->name}}</h5>
+
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
@@ -24,23 +25,50 @@
                 @foreach($user_orders as $order)
                     <tr>
                         <td>{{$order->created_at}}</td>
-                        <td>{{$order->cashback_per_month}}</td>
-                        <td>{{$order->current_cashback}}</td>
                         <td>
-                            @if($order->current_cashback < $order->total_paid)
-                                {{$order->current_cashback + $order->cashback_per_month}}
-                            @else {{$order->total_paid}}
+                            @if($order->user_get_cashback == 'yes' && $order->payback_status == 'yes')
+                                0 грн
+                            @else
+                                {{$order->cashback_per_month}} грн
+                            @endif
+                             </td>
+                        <td>
+                            @if($order->user_get_cashback == 'yes' && $order->payback_status == 'yes')
+                               0 грн
+                            @else
+                            {{$order->current_cashback}} грн
                             @endif
                         </td>
-                        <td>{{$order->total_paid}}</td>
                         <td>
-                            <form  id="edit" method="get" action="">
-                            <button type="button" class="btn btn-primary">Вывести {{$order->current_cashback}} грн.</button>
+                            @if($order->user_get_cashback == 'yes' )
+                                0 грн
+                            @else
+                                @if($order->current_cashback < $order->total_paid)
+                                    {{$order->current_cashback + $order->cashback_per_month}}
+                                @else {{$order->total_paid}}
+                            @endif
+                            @endif
+                        </td>
+                        <td>{{$order->total_paid}} грн</td>
+                        <td>
+                            <form  id="edit" method="get" action="{{route('cashback_payback', $order->order_id)}}">
+                                @if($order->user_get_cashback == 'yes' && $order->payback_status == 'no')
+                                <button type="submit" class="btn btn-primary" disabled>
+                                    Вы запросили выведение кешбека.
+                                </button>
+                                @elseif($order->user_get_cashback == 'yes' && $order->payback_status == 'yes')
+                                <button type="submit" class="btn btn-primary" disabled>
+                                    Вы уже вывели свой кешбек.
+                                </button>
+                                @else
+                                        <button type="submit" class="btn btn-primary" @if($order->current_cashback == 0) disabled @endif> Вывести {{$order->current_cashback}} грн.
+                                        </button>
+                                @endif
                             </form>
                         </td>
                         <td>
                             <form  id="edit" method="get" action="{{route('edit_order', $order->order_id)}}">
-                            <button type="submit"  class="btn btn-primary" id="{{$order->order_id}}">Редактровать заказ</button>
+                            <button type="submit"  class="btn btn-primary" id="{{$order->order_id}}" @if($order->user_get_cashback == 'yes') disabled @endif>Редактровать заказ</button>
                             </form>
                         </td>
                     </tr>
@@ -49,8 +77,6 @@
             @endif
             </tbody>
         </table>
-
     </div>
-
 
 @endsection

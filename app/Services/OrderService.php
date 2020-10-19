@@ -11,17 +11,32 @@ class OrderService
     protected $order_repository;
     protected $product_repository;
 
+    /**
+     * OrderService constructor.
+     * @param OrderRepository $order_repository
+     * @param ProductRepository $product_repository
+     */
     public function __construct(OrderRepository $order_repository, ProductRepository $product_repository)
     {
         $this->order_repository = $order_repository;
         $this->product_repository = $product_repository;
     }
 
+    /**
+     * @param $request
+     * @param $cashback
+     * @return \App\Models\Order
+     */
     public function saveOrder($request, $cashback)
     {
         return $this->order_repository->saveOrder($request, $cashback);
     }
 
+    /**
+     * @param $request
+     * @param $cashback
+     * @return \App\Models\Order
+     */
     public function saveWithCashbackOrder($request, $cashback)
     {
         $request['paid'] = 'yes';
@@ -39,6 +54,10 @@ class OrderService
         return $save_to_db;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
     public function getOrders($id)
     {
         $MONTH = 30;
@@ -61,19 +80,33 @@ class OrderService
         }
     }
 
-    /*public function getUserInfo($id)
-    {
-        return $this->getUserInfo($id);
-    }*/
-
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
     public function getUserOrder($id)
     {
         return $this->order_repository->getUserOrder($id);
     }
 
+    /**
+     * @param $request
+     * @param $id
+     * @return int
+     */
     public function updateOrder($request, $id)
     {
         return $this->order_repository->updateOrder($request, $id);
+    }
+
+    /**
+     * @param $request
+     * @param $id
+     * @return int
+     */
+    public function saveCashbackPayback($request, $id)
+    {
+        return $this->order_repository->saveCashbackPayback($request, $id);
     }
 
 }

@@ -12,6 +12,11 @@ class PageController extends Controller
     protected $product_service;
     protected $order_service;
 
+    /**
+     * PageController constructor.
+     * @param ProductService $product_service
+     * @param OrderService $order_service
+     */
     public function __construct(ProductService $product_service, OrderService $order_service)
     {
         $this->product_service = $product_service;
@@ -19,9 +24,7 @@ class PageController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
@@ -36,6 +39,9 @@ class PageController extends Controller
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function buyPage()
     {
         $product = $this->product_service->getProduct();
@@ -46,6 +52,9 @@ class PageController extends Controller
         return view('layouts.error'); //TODO: изменть на 404 или ошибку подключения
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function buyWithCashback()
     {
         if (Auth::check()) {
@@ -55,6 +64,9 @@ class PageController extends Controller
         return redirect('/register'); //TODO: добавить сообщение "Сначала зарегаться"
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function user_account()
     {
         $user = Auth::user();
@@ -65,6 +77,9 @@ class PageController extends Controller
         return view('layouts.error');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function dashboard()
     {
        /* $user = Auth::user();
@@ -73,6 +88,10 @@ class PageController extends Controller
 
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\RedirectResponse
+     */
     public function show($id)
     {
         $user_order = $this->order_service->getUserOrder($id);
@@ -82,5 +101,15 @@ class PageController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function cashback_payback($id)
+    {
+        $order = $this->order_service->getUserOrder($id);
+        return view('pages.cashback_payback', compact('order'));
     }
 }

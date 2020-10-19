@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class OrderRepository
 {
+    /**
+     * @param $request
+     * @param $cashback
+     * @return Order
+     */
     public function saveOrder($request, $cashback)
     {
         $order = new Order;
@@ -29,6 +34,11 @@ class OrderRepository
         return $order;
     }
 
+    /**
+     * @param $request
+     * @param $order
+     * @return Cashback_orders
+     */
     public function saveWithCashbackOrder($request, $order)
     {
         $cashback_order = new Cashback_orders();
@@ -42,6 +52,10 @@ class OrderRepository
         return $cashback_order;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
     public function getUserOrders($id)
     {
         $user_orders = DB::table('orders')
@@ -52,6 +66,10 @@ class OrderRepository
         return $user_orders;
     }
 
+    /**
+     * @param $cashback_orders
+     * @return int
+     */
     public function cashbackUpdate($cashback_orders)
     {
         $db = DB::table('cashback_orders')
@@ -64,14 +82,10 @@ class OrderRepository
         return $db;
     }
 
-    /*public function getUserInfo($id)
-    {
-        return DB::table('orders')
-        ->where('user_id', '=', $id)
-        ->limit(1)
-        ->get();
-    }*/
-
+    /**
+     * @param $id
+     * @return \Illuminate\Support\Collection
+     */
     public function getUserOrder($id)
     {
         $user_order = DB::table('orders')
@@ -81,6 +95,11 @@ class OrderRepository
         return $user_order;
     }
 
+    /**
+     * @param $request
+     * @param $id
+     * @return int
+     */
     public function updateOrder($request, $id)
     {
         return DB::table('orders')
@@ -90,5 +109,22 @@ class OrderRepository
                 'phone_number' => $request->phone_number,
                 'address' => $request->address,
             ]);
+    }
+
+    /**
+     * @param $request
+     * @param $id
+     * @return int
+     */
+    public function saveCashbackPayback($request, $id)
+    {
+        $update_card_number = DB::table('cashback_orders')
+            ->where('order_id', '=', $id)
+            ->update([
+                'card_number' => $request->card_number,
+                'user_get_cashback' => 'yes',
+            ]);
+
+        return $update_card_number;
     }
 }

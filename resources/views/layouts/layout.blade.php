@@ -30,8 +30,9 @@
     @if (Route::has('login'))
         <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             @auth
+                <a href="/" class="text-sm text-gray-700 underline"> На главную </a> <br>
                 <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Настройки профиля</a> <br>
-                <a href="/user/account">Кабинет пользователя</a>
+                <a href="/user/account" class="text-sm text-gray-700 underline">Кабинет пользователя</a>
             @else
                 <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Login</a>
 
@@ -43,10 +44,13 @@
     @endif
 
     </div>
-<div>
-    @include('components.result_messages')
-    @yield('content')
-</div>
+
+        <div class="container">
+            <div class="col-12">
+                @include('components.result_messages')
+                @yield('content')
+            </div>
+        </div>
 
 </body>
 </html>

@@ -85,6 +85,10 @@ class ProductController extends Controller
         //
     }
 
+    /**
+     * @param SaveOrderRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function saveOrder(SaveOrderRequest $request)
     {
         //TODO: save to DB

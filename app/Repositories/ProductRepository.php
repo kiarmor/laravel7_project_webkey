@@ -8,6 +8,9 @@ use App\Models\Product as Product;
 class ProductRepository
 {
 
+    /**
+     * @return bool|\Illuminate\Support\Collection
+     */
     public function getProduct()
     {
         try {
@@ -21,5 +24,4 @@ class ProductRepository
 
         return $product;
     }
-
 }
