@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SaveCashbackRequest;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
 use App\Http\Requests\SaveOrderRequest;
@@ -50,7 +51,7 @@ class OrderController extends Controller
         if ($save_with_cashback){
 
             return redirect('/')
-                ->with(['success' => 'Ваш заказ принят. Менеджер свяжется с Вами.']);
+                ->with(['success' => 'Спасибо за покупку']);
         }
 
          return back()->withErrors(['msg' => 'Ой, что то пошло не так. Повторите попытку']);
@@ -81,7 +82,7 @@ class OrderController extends Controller
      * @param $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function saveCashbackPayback(Request $request, $id)
+    public function saveCashbackPayback(SaveCashbackRequest $request, $id)
     {
         $save_cashback_payback = $this->order_service->saveCashbackPayback($request, $id);
 

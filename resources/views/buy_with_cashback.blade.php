@@ -30,7 +30,7 @@
 
         <div class="col">
             <label for="phone">Номер телефона</label>
-            <input name="phone_number" type="text" class="form-control" placeholder="Your phone number" required>
+            <input name="phone_number" type="text" class="form-control" placeholder="Your phone number"value="@if(old('phone_number')){{old('phone_number')}}@endif" required>
         </div>
 
         <div class="col">
@@ -40,7 +40,7 @@
 
         <div class="col">
             <label for="inputAddress">Адресс доставки</label>
-            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" value="@if(old('address')){{old('address')}}@endif" required>
         </div>
         <hr>
 

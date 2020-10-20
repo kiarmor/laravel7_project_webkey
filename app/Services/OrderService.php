@@ -58,12 +58,17 @@ class OrderService
      * @param $id
      * @return \Illuminate\Support\Collection
      */
-    public function getOrders($id)
+    /*public function getOrders($id)
     {
         $MONTH = 30;
         $all_user_orders = $this->order_repository->getUserOrders($id);
         foreach ($all_user_orders as $user_orders){
             $curr_date = Carbon::parse($user_orders->current_date);
+            $day_of_buy = $curr_date->dayOfYear;
+            $today = Carbon::today()->dayOfYear();
+            $res = $today - $day_of_buy;
+            //$counter = round( $res / $MONTH, 0);
+            $counter = intdiv($res, $MONTH);
             if ($curr_date->addDays($MONTH) <= today()){
                 $user_orders->current_date = $curr_date->format('Y-m-d');
                 if (!$user_orders->current_cashback >= $user_orders->total_paid){
@@ -78,6 +83,38 @@ class OrderService
             }
             else return $all_user_orders;
         }
+    }*/
+    public function getOrders($id)
+    {
+        $all_user_orders = $this->order_repository->getUserOrders($id);
+        foreach ($all_user_orders as $user_orders){
+            $counter = $this->findCounter($user_orders);
+                if (!$user_orders->current_cashback >= $user_orders->total_paid){
+                    $user_orders->current_cashback = $user_orders->cashback_per_month * $counter;
+                }
+                else {
+                    $user_orders->current_cashback = $user_orders->total_paid;
+                }
+        }
+       return $all_user_orders;
+    }
+    public function findCounter($user_orders)
+    {
+        $MONTH = 30;
+        $curr_date = Carbon::parse($user_orders->current_date);
+        $day_of_buy = $curr_date->dayOfYear;
+        $today = Carbon::today()->dayOfYear();
+        if ($curr_date->year < today()->year){
+            $days_of_last_year= 365 - $day_of_buy;
+           $res = $days_of_last_year + $today;
+
+        }else $res = $today - $day_of_buy;
+
+        $counter = intdiv($res, $MONTH);
+        if ($counter > 12) {
+            return 12;
+        }
+        return $counter;
     }
 
     /**

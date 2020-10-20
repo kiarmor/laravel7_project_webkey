@@ -22,22 +22,22 @@
         @csrf
         <div class="col">
             <label for="name">Имя</label>
-            <input name="user_name" type="text" class="form-control" placeholder="Enter your name" required>
+            <input name="user_name" type="text" class="form-control" placeholder="Enter your name" value="@if(old('user_name')){{old('user_name')}}@endif" required>
         </div>
 
         <div class="col">
             <label for="phone">Номер телефона</label>
-            <input name="phone_number" type="text" class="form-control" placeholder="Your phone number" required>
+            <input name="phone_number" type="text" class="form-control" placeholder="Your phone number"value="@if(old('phone_number')){{old('phone_number')}}@endif" required>
         </div>
 
         <div class="col">
             <label for="name">Email</label>
-            <input name="email" type="email" class="form-control" placeholder="Enter your email">
+            <input name="email" type="email" class="form-control" placeholder="Enter your email" value="@if(old('email')){{old('email')}}@endif" required>
         </div>
 
         <div class="col">
             <label for="inputAddress">Адресс доставки</label>
-            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+            <input name="address" type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" value="@if(old('address')){{old('address')}}@endif" required>
         </div>
         <hr>
 

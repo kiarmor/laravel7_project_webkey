@@ -70,17 +70,17 @@ class OrderRepository
      * @param $cashback_orders
      * @return int
      */
-    public function cashbackUpdate($cashback_orders)
+    /*public function cashbackUpdate($cashback_orders)
     {
         $db = DB::table('cashback_orders')
             ->where('order_id', $cashback_orders->order_id)
             ->update([
-                'current_date' => $cashback_orders->current_date,
+                //'current_date' => $cashback_orders->current_date,
                 'current_cashback' => $cashback_orders->current_cashback,
             ]);
 
         return $db;
-    }
+    }*/
 
     /**
      * @param $id

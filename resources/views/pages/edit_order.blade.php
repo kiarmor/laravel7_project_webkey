@@ -5,7 +5,6 @@
 @section('content')
 
     @foreach($user_order as $order)
-        <p>Номер Вашего заказа {{$order->id}} </p>
 
     <!-- Main content -->
     <section class="content">

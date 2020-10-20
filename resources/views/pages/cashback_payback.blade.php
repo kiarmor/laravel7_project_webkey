@@ -12,7 +12,7 @@
                     @csrf
                     <div class="form-group has-feedback">
                         <label for="card_number">Введите номер карты для получения кешбэка</label>
-                        <input type="number" class="form-control" name="card_number" required>
+                        <input type="number" class="form-control" name="card_number" value="@if(old('card_number')){{old('card_number')}}@else  @endif" placeholder="Введите номер карты" required>
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary ">Подтвердить</button>
