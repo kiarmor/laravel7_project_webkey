@@ -29,7 +29,7 @@ class OrderController extends Controller
 
         if ($save_to_db){
             return redirect('/')
-                ->with(['success' => 'Ваш заказ принят. Мы скоро свяжемся с Вамми.']);
+                ->with(['success' => 'Спасибо за покупку.']);
         }
         else {
             return redirect()

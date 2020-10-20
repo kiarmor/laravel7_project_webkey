@@ -73,6 +73,8 @@ class PageController extends Controller
         $user_orders = $this->order_service->getOrders($user->id);
         if ($user_orders) {
             return view('user_account', compact('user', 'user_orders'));
+        }elseif ($user_orders === null){
+            return view('user_account', compact('user'));
         }
         return view('layouts.error');
     }
