@@ -29,13 +29,18 @@ Route::get('/buy', 'PageController@buyPage')->name('buy');
 Route::post('/save', 'OrderController@saveOrder')->name('saveOrder');
 
 //TODO: middleware group
-Route::get('/buy_cashback', 'PageController@buyWithCashback')->name('buy_cashback');
-Route::post('/save_with_cashback', 'OrderController@buyWithCashback')->name('buyWithCashback');
-Route::get('/edit_order/{id}', 'PageController@show')->name('edit_order');
-//Route::post('/update_order/{id}', 'OrderController@update')->name('update_order');
-Route::resource('orders', 'OrderController')->names('orders');
-Route::get('/cashback_payback/{id}', 'PageController@cashback_payback')->name('cashback_payback');
-Route::post('/save_card/{id}', 'OrderController@saveCashbackPayback')->name('save_cashback_payback');
-
+Route::group(['middleware' => 'user'], function () {
+    Route::get('/buy_cashback', 'PageController@buyWithCashback')->name('buy_cashback');
+    Route::post('/save_with_cashback', 'OrderController@buyWithCashback')->name('buyWithCashback');
+    Route::get('/edit_order/{id}', 'PageController@show')->name('edit_order');
+    //Route::post('/update_order/{id}', 'OrderController@update')->name('update_order');
+    Route::resource('orders', 'OrderController')->names('orders');
+    Route::get('/cashback_payback/{id}', 'PageController@cashback_payback')->name('cashback_payback');
+    Route::post('/save_card/{id}', 'OrderController@saveCashbackPayback')->name('save_cashback_payback');
+});
 
 Route::get('/user/account', 'PageController@user_account')->middleware(['auth:sanctum', 'verified'])->name('user_account');
+
+Route::group(['middleware' => 'admin'], function () {
+    Route::get('admin', 'PageController@adminDashboard');
+});

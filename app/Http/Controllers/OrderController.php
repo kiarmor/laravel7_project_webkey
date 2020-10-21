@@ -35,7 +35,7 @@ class OrderController extends Controller
         else {
             return redirect()
                 ->back()
-                ->withErrors(['msg' => 'Error'])
+                ->withErrors(['msg' => 'Ой, что то пошло не так. Повторите попытку'])
                 ->withInput();
         }
     }

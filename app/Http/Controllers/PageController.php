@@ -114,4 +114,11 @@ class PageController extends Controller
         $order = $this->order_service->getUserOrder($id);
         return view('pages.cashback_payback', compact('order'));
     }
+
+
+    public function adminDashboard()
+    {
+
+        return view('admin.admin');
+    }
 }

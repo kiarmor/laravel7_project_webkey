@@ -101,7 +101,7 @@ class OrderService
     public function findCounter($user_orders)
     {
         $MONTH = 30;
-        $curr_date = Carbon::parse($user_orders->current_date);
+        $curr_date = Carbon::parse($user_orders->day_of_buy);
         $day_of_buy = $curr_date->dayOfYear;
         $today = Carbon::today()->dayOfYear();
         if ($curr_date->year < today()->year){

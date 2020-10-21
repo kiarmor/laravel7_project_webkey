@@ -21,7 +21,7 @@ class CreateCashbackOrdersTable extends Migration
             $table->enum('paid', ['yes', 'no'],)->default('no');
             $table->float('current_cashback')->default(0);
             $table->float('cashback_per_month')->nullable();
-            $table->date('current_date')->default(today());
+            $table->date('day_of_buy')->default(today());
             $table->float('total_paid')->nullable();
             $table->enum('user_get_cashback', ['yes', 'no'])->default('no');
             $table->bigInteger('card_number')->nullable()->default(null);
