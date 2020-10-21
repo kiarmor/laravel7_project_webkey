@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\DB;
 
 class OrderRepository
 {
+    public function getAllOrders()
+    {
+        return DB::table('orders')->get();
+    }
+
+    public function getCashbackOrders()
+    {
+        $cashback_orders = DB::table('orders')
+            ->join('cashback_orders', 'cashback_orders.order_id', '=', 'orders.id')
+            ->get();
+
+        return $cashback_orders;
+    }
     /**
      * @param $request
      * @param $cashback

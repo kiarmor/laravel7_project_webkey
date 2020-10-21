@@ -43,4 +43,6 @@ Route::get('/user/account', 'PageController@user_account')->middleware(['auth:sa
 
 Route::group(['middleware' => 'admin'], function () {
     Route::get('admin', 'PageController@adminDashboard');
+    Route::get('/admin/orders', 'Admin\AdminController@getAllOrders')->name('allOrders');
+    Route::get('/admin/cashback_orders', 'Admin\AdminController@getCashbackOrders')->name('cashbackOrders');
 });

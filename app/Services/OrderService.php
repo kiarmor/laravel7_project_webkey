@@ -22,6 +22,16 @@ class OrderService
         $this->product_repository = $product_repository;
     }
 
+    public function getAllOrders()
+    {
+        return $this->order_repository->getAllOrders();
+    }
+
+    public function getCashbackOrders()
+    {
+        return $this->order_repository->getCashbackOrders();
+    }
+
     /**
      * @param $request
      * @param $cashback
