@@ -115,4 +115,9 @@ class PageController extends Controller
     {
         return view('admin.admin');
     }
+
+    public function construct()
+    {
+       return view('pages.page');
+    }
 }

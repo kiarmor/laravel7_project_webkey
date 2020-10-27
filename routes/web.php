@@ -37,3 +37,5 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('/admin/orders', 'Admin\AdminController@getAllOrders')->name('allOrders');
     Route::get('/admin/cashback_orders', 'Admin\AdminController@getCashbackOrders')->name('cashbackOrders');
 });
+
+Route::get('/construct', 'PageController@construct')->name('construct');

@@ -14,7 +14,6 @@
 
 <div>
     <h1 align="center">Добро пожаловать!</h1> <br>
-    {{--<img src="../../storage/app/public/1.jpg" alt="no image" align="center"> Брать из БД--}}
     @if(isset($product))
         @foreach($product as $item)
         <p align="center">У нас вы можете приобрести
@@ -26,6 +25,7 @@
             <div align ="center">
                 <a href="/buy">Купить сейчас</a> <br>
                 <a href="/buy_cashback">Купить с кешбеком 100 %</a> <br>
+                <a href="/construct">Construsct</a>
             </div>
         @else <h5 align="center">{{env('CONNECTION_TO_DB_ERROR')}}</h5>
         @endif
