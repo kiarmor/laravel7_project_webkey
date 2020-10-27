@@ -5,18 +5,18 @@
 
 
 @section('content')
-
+    @if(isset($product))
     @foreach ($product as $item)
 
         <a href="/buy_cashback"><p>У Вас все еще есть возможность приобрести {{$item->price}} с кешбэком в 100%!! Не упусти свой шанс!</p></a><br>
         <p>Цена {{$item->price}}</p> <br>
     @endforeach
 
-    @if($errors->any())
 
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
+    @if($errors->any())
+        @foreach($errors->all() as $error)
+            <li>{{$error}}</li>
+        @endforeach
     @endif
     <form method="post" action="{{route('saveOrder')}}">
         @csrf
@@ -45,4 +45,6 @@
             <button  type="submit" class="btn btn-success" >Купить</button>
         </div>
     </form>
+    @else <h5 align="center">{{env('CONNECTION_TO_DB_ERROR')}}</h5>
+    @endif
 @endsection

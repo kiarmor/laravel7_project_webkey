@@ -23,13 +23,12 @@
             {{$item->price}} гривен.
         </p>
         @endforeach
-    @else <h5 align="center">Нет связи с БД</h5>
+            <div align ="center">
+                <a href="/buy">Купить сейчас</a> <br>
+                <a href="/buy_cashback">Купить с кешбеком 100 %</a> <br>
+            </div>
+        @else <h5 align="center">{{env('CONNECTION_TO_DB_ERROR')}}</h5>
         @endif
-
-        <div align ="center">
-            <a href="/buy">Купить сейчас</a> <br>
-            <a href="/buy_cashback">Купить с кешбеком 100 %</a> <br>
-        </div>
 </div>
 
 

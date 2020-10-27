@@ -29,14 +29,10 @@ class PageController extends Controller
     public function index()
     {
         $product = $this->product_service->getProduct();
-
             if ($product) {
                 return view('my_welcome', compact('product'));
             }
-            return view('layouts.error'); //TODO: изменть на 404 или ошибку подключения
-
-
-
+            return view('my_welcome');
     }
 
     /**
@@ -45,11 +41,10 @@ class PageController extends Controller
     public function buyPage()
     {
         $product = $this->product_service->getProduct();
-
         if ($product) {
             return view ('buy', compact('product'));
         }
-        return view('layouts.error'); //TODO: изменть на 404 или ошибку подключения
+        return view('buy'); //TODO: изменть на 404 или ошибку подключения
     }
 
     /**
