@@ -118,6 +118,7 @@ class PageController extends Controller
 
     public function construct()
     {
+        require_once __DIR__ . '/../../../public/index_pagebuilder.php';
        return view('pages.page');
     }
 }

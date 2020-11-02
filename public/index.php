@@ -58,7 +58,7 @@ $kernel->terminate($request, $response);
  * Page builder code
  * */
 
-error_reporting(E_ALL);
+/*error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
 define('SUPRA', 1);
@@ -69,4 +69,4 @@ include_once "include/modal/section.php";
 
 include_once 'include/view.php';
 
-$view = new View();
+$view = new View();*/
