@@ -8,11 +8,17 @@ use Illuminate\Support\Facades\DB;
 
 class OrderRepository
 {
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getAllOrders()
     {
         return DB::table('orders')->get();
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function getCashbackOrders()
     {
         $cashback_orders = DB::table('orders')
@@ -20,6 +26,18 @@ class OrderRepository
             ->get();
 
         return $cashback_orders;
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function getOrdersWithoutCashback()
+    {
+        $orders_without_cashback = DB::table('orders')
+            ->where('cashback', '=', 0)
+            ->get();
+
+        return $orders_without_cashback;
     }
     /**
      * @param $request

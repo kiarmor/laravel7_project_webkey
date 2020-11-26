@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
-                        <h5>Здесь Вы можете видеть все заказы</h5>
+                        <h5>Здесь Вы можете видеть все заказы без кешбэка</h5>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -50,25 +50,10 @@
                                 </tbody>
                             </table>
                         </div>
-                       {{-- <div class="text-center">
-                            <p>{{count($orders)}} order('s) from {{$count_orders}}</p>
-                            @if($orders->total() >  $orders->count())
-                                <br>
-                                <div class="row justify-content-center">
-                                    <div class="col-md-12">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                {{$orders->links()}}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif--}}
-
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
     </section>

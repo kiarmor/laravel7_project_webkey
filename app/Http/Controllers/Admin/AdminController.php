@@ -27,8 +27,23 @@ class AdminController extends Controller
 
     public function getCashbackOrders()
     {
-        $orders = $this->order_service->getCashbackOrders();
-        return view('admin.orders.cashback_orders', compact('orders'));
+        $cashback_orders = $this->order_service->getCashbackOrders();
+        return view('admin.orders.cashback_orders', [
+            'orders' => $cashback_orders,
+        ]);
+    }
+
+    public function getOrdersWithoutCashback()
+    {
+        $orders_without_cashback = $this->order_service->getOrdersWithoutCashback();
+        return view('admin.orders.orders_without_cashback', [
+            'orders' => $orders_without_cashback,
+        ]);
+    }
+
+    public function changePaybackStatus(Request $request)
+    {
+        //dd($request);
     }
 
 

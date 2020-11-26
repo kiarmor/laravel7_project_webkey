@@ -124,7 +124,7 @@
                     <ul class="treeview-menu">
                         <li><a href="{{route('allOrders')}}">Все заказы</a></li>
                         <li><a href="{{route('cashbackOrders')}}">Заказы с кешбэком</a></li>
-                        <li><a href="">Заказы без кешбэка</a></li>
+                        <li><a href="{{route('ordersWithoutCashback')}}">Заказы без кешбэка</a></li>
                     </ul>
                 </li>
                 <li class="treeview">

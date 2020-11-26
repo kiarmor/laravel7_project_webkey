@@ -19,6 +19,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-body">
+                        <h5>Здесь Вы можете видеть заказы с кешбэком</h5>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -35,6 +36,7 @@
                                     <th>Номер карты</th>
                                     <th>Статус выплаты</th>
                                     <th>Изменить статус заказа</th>
+                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -57,12 +59,19 @@
                                             @endif
                                         </td>
                                         <td>{{$order->payback_status}}</td>
-                                        <td>
-                                            <select name="" id="">
-                                                <option value="">no</option>
-                                                <option value="">yes</option>
-                                            </select>
-                                        </td>
+                                                <form method="post" action="{{route('change')}}">
+                                                @csrf
+                                                <td>
+                                                <select name="payback" id="payback">
+                                                    <option value="no">no</option>
+                                                    <option value="yes">yes</option>
+                                                </select>
+                                                </td>
+                                                <td>
+                                                <button  type="submit" class="btn-xs btn-success">изменить</button>
+                                                </td>
+                                                </form>
+
                                     </tr>
                                 @empty
                                     <tr>
@@ -76,8 +85,6 @@
                 </div>
             </div>
         </div>
-        </div>
-
     </section>
 
 @endsection

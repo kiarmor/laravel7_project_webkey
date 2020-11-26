@@ -32,6 +32,11 @@ class OrderService
         return $this->order_repository->getCashbackOrders();
     }
 
+    public function getOrdersWithoutCashback()
+    {
+        return$this->order_repository->getOrdersWithoutCashback();
+    }
+
     /**
      * @param $request
      * @param $cashback

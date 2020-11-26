@@ -23,6 +23,7 @@ class CreateOrdersTable extends Migration
             $table->text('email')->nullable();
             $table->text('address');
             $table->enum('paid', ['yes', 'no'],)->default('no');
+            $table->boolean('cashback')->default('0');
         });
     }
 

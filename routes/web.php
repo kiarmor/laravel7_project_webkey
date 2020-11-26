@@ -29,8 +29,8 @@ Route::get('/buy', 'PageController@buyPage')->name('buy');
 Route::post('/save', 'OrderController@saveOrder')->name('saveOrder');
 
 //TODO: middleware group
+Route::get('/buy_cashback', 'PageController@buyWithCashback')->name('buy_cashback');
 Route::group(['middleware' => 'user'], function () {
-    Route::get('/buy_cashback', 'PageController@buyWithCashback')->name('buy_cashback');
     Route::post('/save_with_cashback', 'OrderController@buyWithCashback')->name('buyWithCashback');
     Route::get('/edit_order/{id}', 'PageController@show')->name('edit_order');
     //Route::post('/update_order/{id}', 'OrderController@update')->name('update_order');
@@ -45,4 +45,6 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin', 'PageController@adminDashboard');
     Route::get('/admin/orders', 'Admin\AdminController@getAllOrders')->name('allOrders');
     Route::get('/admin/cashback_orders', 'Admin\AdminController@getCashbackOrders')->name('cashbackOrders');
+    Route::get('/admin/orders_without_cashback', 'Admin\AdminController@getOrdersWithoutCashback')->name('ordersWithoutCashback');
+    Route::post('/admin/cashback_orders', 'Admin\AdminController@changePaybackStatus')->name('change');
 });
